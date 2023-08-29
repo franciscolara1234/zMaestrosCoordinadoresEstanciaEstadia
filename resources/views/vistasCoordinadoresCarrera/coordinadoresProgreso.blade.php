@@ -144,7 +144,7 @@
                                     <td>{{$items->tipo_procesos_proceso->nombreProceso}}</td>
                                     <td>{{$items->user_proceso->carrera_user->NombreCarrera}}</td>
                                     <td>{{$items->aa_academico_procesos[0]->aa_academico->Nombre}} {{$items->aa_academico_procesos[0]->aa_academico->APP}} {{$items->aa_academico_procesos[0]->aa_academico->APM}}</td>
-                                    <td><p><a href="{{ route('progresoDocumentacionCoordinacion', $identificadorProceso = $items->IdProceso) }}" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" style="color:blue;">Ver Progreso</a></p></td>
+                                    <td><p><a href="{{ route('progresoDocumentacionCoordinacion', $identificadorProceso = $items->IdProceso) }}" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" style="color:#3B96D1;">Ver Progreso</a></p></td>
                                     {{-- <td>{{$datosTabla['nombre_proceso']}}</td>
                                     <td>{{$datosTabla['nombre_carrera']}}</td>
                                     <td>{{$datosTabla['nombre_emp']}}</td> --}}

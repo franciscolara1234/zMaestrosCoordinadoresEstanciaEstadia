@@ -125,12 +125,12 @@
                                     <td>
                                         
                                         @if (sizeof($item->proceso->calificaciones_proceso)==0)
-                                            <a href="{{ route('ingresarCalificacion', [$idProcesoAlumno=$item->proceso->IdProceso, $identificadorProceso = $item->proceso->IdTipoProceso] )}}">
+                                            <a style="color: #3B96D1" href="{{ route('ingresarCalificacion', [$idProcesoAlumno=$item->proceso->IdProceso, $identificadorProceso = $item->proceso->IdTipoProceso] )}}">
                                                 ingresar calificacion
                                             </a>
 
                                         @else
-                                        <a href="{{ route('ingresarCalificacion', [$idProcesoAlumno=$item->proceso->IdProceso, $identificadorProceso = $item->proceso->IdTipoProceso])}}" style="color:blue">
+                                        <a href="{{ route('ingresarCalificacion', [$idProcesoAlumno=$item->proceso->IdProceso, $identificadorProceso = $item->proceso->IdTipoProceso])}}" style="color:#3B96D1">
                                             Ver Calificación
                                         </a>
                                         @endif

@@ -219,7 +219,7 @@
                                                     <div class="justify-content-center">
 
 
-                                                        <a style="color: blue" href="{{ route('ver_documentoAcademico', [$item2->documentos_detallesDoc->ruta, $item2->documentos_detallesDoc->IdTipoDoc])}}"  target="_blank" class="ver-cedula">ver cedula</a>
+                                                        <a style="color:#3B96D1" href="{{ route('ver_documentoAcademico', [$item2->documentos_detallesDoc->ruta, $item2->documentos_detallesDoc->IdTipoDoc])}}"  target="_blank" class="ver-cedula">ver documento</a>
                                                         {{-- <form   target="_blank"  action="{{ route('ver_documentoAcademico', [$item2->documentos_detallesDoc->ruta, $item2->documentos_detallesDoc->IdTipoDoc])}}" class="d-flex"
                                                         style="padding-left: 20%; padding-right: 20%; padding-top:1%;">
                                                                 @csrf

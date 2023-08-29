@@ -371,7 +371,8 @@ class CoordinadorCarreraRutasController extends Controller
                         break;
             }
         }
-        // dump($informacionProcesoElejido);
+        dump($informacionProcesoElejido);
+        
         return view('vistasCoordinadoresCarrera.coordinadoresInformacionAlumno')->with(['document1' => $document1])->with(['document2' => $document2])->with(['document3' => $document3])->with(['document4' => $document4])->with(['document5' => $document5])->with(['informacionProcesoElejido'=>$informacionProcesoElejido]);
     }
 
@@ -406,6 +407,7 @@ class CoordinadorCarreraRutasController extends Controller
             $idAseAcademico = Auth::user()->id;
             // $tituloInicio = "Procesos Anteriores";
             $procesoSeleccionado = Orm_proceso::where('IdProceso', $idProcesoAlumno)->first();
+            dump($procesoSeleccionado);
         return view('vistasCoordinadoresCarrera.coordinadoresCalificacion')->with(['procesoSeleccionado'=>$procesoSeleccionado]);
 
     }

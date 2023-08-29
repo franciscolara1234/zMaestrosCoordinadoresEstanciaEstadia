@@ -20,7 +20,8 @@ class Orm_proceso extends Model
         'carreras_procesos',
         'tipo_procesos_proceso',
         'periodo_proceso:IdPeriodo,Periodo',
-        'calificaciones_proceso'
+        'calificaciones_proceso',
+        'aempresarial_procesos'
         
     ];
 
@@ -36,7 +37,7 @@ class Orm_proceso extends Model
 
     //relacion con las tablas aa_pp(asesor academico proceso) y proceso
     public function aempresarial_procesos(){
-        return $this->hasMany('App\Models\Orm_aempresarial_proceso', 'IdProceso', 'IdProceso');
+        return $this->hasOne('App\Models\Orm_aempresarial_proceso', 'IdProceso', 'IdProceso');
     }
 
     //relacion con las tablas proceso y detalledoc

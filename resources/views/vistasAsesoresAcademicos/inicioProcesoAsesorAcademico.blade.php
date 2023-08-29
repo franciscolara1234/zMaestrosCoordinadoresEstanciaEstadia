@@ -139,7 +139,7 @@
                                     {{-- <td>{{$datosTabla['matricula']}}</td> --}}
                                     <td>{{$items->proceso->user_proceso->Matricula}}</td>
                                     <td>
-                                        <a href="{{ route('progresoDocumentacion', $identificadorProceso = $items->proceso->IdProceso) }}">
+                                        <a href="{{ route('progresoDocumentacion', $identificadorProceso = $items->proceso->IdProceso) }}" style="color:#3B96D1">
                                             {{$items->proceso->user_proceso->alumno_perfil_user->Nombre}} {{$items->proceso->user_proceso->alumno_perfil_user->APP}} {{$items->proceso->user_proceso->alumno_perfil_user->APM}}
                                         </a>
                                     </td>

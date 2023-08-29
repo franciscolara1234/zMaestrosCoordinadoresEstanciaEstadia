@@ -89,14 +89,24 @@
                             <p class="carrera-alumno">carrera: {{$alumno->carrera_user->NombreCarrera}}</p>
                         </div>
                         <div class="contenedor-empresa-alumno">
-                            <p class="empresa-alumno">empresa: </p>
+                            <p class="empresa-alumno">
+                                {{-- Ase.Empresarial:
+                                @if (!empty($alumno->aempresarial_procesos->aemp_pro))
+                                {{$alumno->aempresarial_procesos->aemp_pro->Nombre}}
+                            @else
+                                Sin asesor
+                            @endif  --}}
+                        </p>
                         </div>
                         <div class="contenedor-empresa-convenio-alumno">
-                            <p class="empresa-convenio-alumno">convenio:</p>
+                            <p class="empresa-convenio-alumno">
+                                {{-- convenio: --}}
+
+                            </p>
                         </div>
                         <div class="contenedor-ver-cedula-alumno link-info">
                             {{-- "{{ route('ver_documentoAcademico', [$item2->documentos_detallesDoc->ruta, $item2->documentos_detallesDoc->IdTipoDoc])}}" --}}
-                            <a style="color:blue" href="{{ route('ver_documentoAcademico', [$documento->ruta, $documento->IdTipoDoc])}}"  target="_blank" class="ver-cedula">ver documento</a>
+                            <a style="color:#3B96D1" href="{{ route('ver_documentoAcademico', [$documento->ruta, $documento->IdTipoDoc])}}"  target="_blank" class="ver-cedula">ver documento</a>
                         </div>
                     </div>
                 </div>

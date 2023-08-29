@@ -79,7 +79,14 @@
                             <p class="carrera-alumno">carrera: {{$procesoSeleccionado->user_proceso->carrera_user->NombreCarrera}}</p>
                         </div>
                         <div class="contenedor-empresa-alumno">
-                            <p class="empresa-alumno">empresa: </p>
+                            <p class="empresa-alumno">ase. empresarial: 
+                                @if (!empty($procesoSeleccionado->aempresarial_procesos->aemp_pro))
+                                    {{$procesoSeleccionado->aempresarial_procesos->aemp_pro->Nombre}}
+                                @else
+                                    Sin asesor
+                                @endif
+
+                            </p>
                         </div>
                         <div class="contenedor-empresa-convenio-alumno">
                             <p class="empresa-convenio-alumno">PROFESOR(A):
@@ -89,7 +96,7 @@
                             </p>
                         </div>
                         <div class="contenedor-ver-cedula-alumno">
-                            <a class="ver-cedula" Target="_blank" href="{{ route('progresoDocumentacionCoordinacion', $procesoSeleccionado->IdProceso) }}" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" style="color:blue;">Ver Progreso Vinculación</a>
+                            <a class="ver-cedula" Target="_blank" href="{{ route('progresoDocumentacionCoordinacion', $procesoSeleccionado->IdProceso) }}" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" style="color:#3B96D1;">Ver Progreso Vinculación</a>
                         </div>
                     </div>
                 </div>

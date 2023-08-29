@@ -86,8 +86,12 @@
                             </p>
                         </div>
                         <div class="contenedor-empresa-alumno">
-                            <p class="empresa-alumno">empresa: 
-                                {{-- {{$datosAlumno[0]->nombre_emp}} --}}
+                            <p class="empresa-alumno">Ase. empresarial: 
+                                @if (!empty($informacionProcesoElejido[0]->aempresarial_procesos->aemp_pro))
+                                    {{$informacionProcesoElejido[0]->aempresarial_procesos->aemp_pro->Nombre}}
+                                @else
+                                    Sin Asesor
+                                @endif
                             </p>
                         </div>
                         <div class="contenedor-empresa-convenio-alumno">
@@ -102,7 +106,7 @@
                             @else
                                 @if (($informacionProcesoElejido[0]->calificaciones_proceso[0]->TipoCalificaciones)==1)
 
-                                <a class="calificacion-alumno" href="{{ route('calificacionCoordinacion',[$procesoAlumno  = $informacionProcesoElejido[0]->IdProceso , $identificacdorProceso =  $informacionProcesoElejido[0]->IdTipoProceso ])}}">
+                                <a style="color: #3B96D1" class="calificacion-alumno" href="{{ route('calificacionCoordinacion',[$procesoAlumno  = $informacionProcesoElejido[0]->IdProceso , $identificacdorProceso =  $informacionProcesoElejido[0]->IdTipoProceso ])}}">
                                     Calificación final: {{$informacionProcesoElejido[0]->calificaciones_proceso[0]->cal_final}}   
                                 </a>
 
@@ -110,7 +114,7 @@
                                  
                                 @elseif(($informacionProcesoElejido[0]->calificaciones_proceso[1]->TipoCalificaciones)==1)
 
-                                <a class="calificacion-alumno" href="{{ route('anteriorCalificacion',[$procesoAlumno  = $informacionProcesoElejido[0]->IdProceso , $identificacdorProceso =  $informacionProcesoElejido[0]->IdTipoProceso ])}}">
+                                <a style="color: #3B96D1" class="calificacion-alumno" href="{{ route('anteriorCalificacion',[$procesoAlumno  = $informacionProcesoElejido[0]->IdProceso , $identificacdorProceso =  $informacionProcesoElejido[0]->IdTipoProceso ])}}">
                                     Calificación final: {{$informacionProcesoElejido[0]->calificaciones_proceso[1]->cal_final}}   
                                 </a>
                                 @endif

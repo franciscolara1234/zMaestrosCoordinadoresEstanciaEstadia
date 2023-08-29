@@ -582,7 +582,8 @@ class AsesorAcademicoRutasController extends Controller
                 }
 
 
-        // dump($alumno);
+             
+
         // dump($documento);
 
         return view('vistasAsesoresAcademicos.asesoresAcademicosIngresarMensajeCedulaDefinicionProyecto')->with(['tituloPagina'=>$tituloPagina])->with(['alumno'=>$alumno])->with(['documento'=>$documento])->with(['estatusDocumento'=>$estatusDocumento])->with(['idProceso'=>$idProceso])->with(['tituloProceso'=>$tituloProceso]);
