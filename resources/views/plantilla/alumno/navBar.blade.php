@@ -20,9 +20,9 @@
                         <li><a class="dropdown-item" href="{{ route('estancia1.index', [1]) }}">Estancias I</a></li>
                         <li><a class="dropdown-item" href="{{ route('estancia1.index', [2]) }}">Estancias II</a></li>
                         <li><a class="dropdown-item" href="{{ route('estancia1.index', [3]) }}">Estadías</a></li>
-                        <li><a class="dropdown-item" href="{{ route('estancia1.index', [4]) }}">Estadias Nacionales</a>
+                        <li><a class="dropdown-item" href="{{ route('estancia1.index', [5]) }}">Estadias Nacionales</a>
                         </li>
-                        <li><a class="dropdown-item" href="{{ route('estancia1.index', [5]) }}">Servicio Social (Terapia
+                        <li><a class="dropdown-item" href="{{ route('estancia1.index', [4]) }}">Servicio Social (Terapia
                                 Fisica)</a></li>
                     </ul>
                 </li>
@@ -31,6 +31,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('fallos.index') }}">Soporte</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('vistaEmpresa.index') }}">Empresa</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login.destroy') }}">Cerrar Sesión</a>

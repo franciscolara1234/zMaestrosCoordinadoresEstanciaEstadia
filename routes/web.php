@@ -33,6 +33,8 @@ use App\Models\Formulario;
 use App\Models\universidad;
 use League\CommonMark\Block\Element\Document;
 
+use App\Http\Controllers\EmpresaController;
+use App\Models\Empresa;
 
 //controlladores para asesores academicos y coordinadores
 use App\Http\Controllers\AsesorAcademicoRutasController;
@@ -504,3 +506,44 @@ Route::controller(CoordinadorCarreraRutasController::class)->group(function (){
 //     Route::get('calificaciones', 'calificaciones' )->name('calificaciones'); 
 //     Route::get('verCalificacionesAlumno/{identificador}/{identificadorProceso}', 'verCalificacionesAlumno' )->name('verCalificacionesAlumno');
 // });
+
+
+
+
+
+
+    //--------------Router Link:Modulo Empresa---------------
+    Route::match(['get'],'/vistaEmpresa/Inicio',[EmpresaController::class,'vistaEmpresa'])
+    ->name('vistaEmpresa_inicio.index');//Crear modulos
+
+    // Route::match(['get'],'/vistaEmpresa/Inicio',[EmpresaController::class,'vertest'])
+    // ->name('vistaadminempresa.index');
+
+    //editar datos empresa
+    Route::match(['post','get','delete'],'/EditarDatosEmpresa/{IdEmp}', [EmpresaController::class, 'editarEmpresa'])
+    ->name('editarEmpresa.index');
+
+    //vista editar empresa
+    Route::match(['post','get','delete'],'/editarEmpresa/{IdEmp}',[EmpresaController::class, 'ver_datos_empresa'])
+    ->name('ver_datos_empresa.index');
+
+    //eliminar empresa
+    Route::match(['post','get','delete'],'/eliminarempresa{IdEmp}', [EmpresaController::class, 'eliminarEmpresa'])
+    ->name('eliminarEmpresa.index');
+
+    //usuario ver datos empresa
+    Route::match(['get'],'/vistaEmpresaAlumno/Inicio',[EmpresaController::class,'verempresausuario'])
+    ->name('vistaEmpresa.index');
+
+    //admin ver select de tipoempresa y tamañoempresa
+    Route::get('/vistaEmpresaAdmin',[EmpresaController::class, 'verempresasadmin'])
+    ->name('DatosEmpresaNuevo.index');
+
+    //Agregar empresa
+    Route::get('/registro_de_empresa', [EmpresaController::class, 'registroEmpresa'])
+    ->name('empresa_registro.index')
+    ->middleware('auth.admin');
+
+    //funcion registrar empresa
+    Route::post('/agregar_empresa', [EmpresaController::class, 'agregar'])
+    ->name('registrar_empresa.index');

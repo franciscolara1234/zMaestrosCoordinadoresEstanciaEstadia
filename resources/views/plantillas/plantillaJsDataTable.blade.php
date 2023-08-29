@@ -41,7 +41,7 @@
                 <script>
                     Swal.fire(
                             'Guardado!',
-                            'Las Observaciones se han guardado con Exito.',
+                            'Las Observaciones Se Han guardado con Exito.',
                             'Éxito'
                             )
                 </script>
@@ -50,7 +50,7 @@
                 <script>
                     Swal.fire(
                             'Aula Creada!',
-                            'Se ha abierto el Aula.',
+                            'Se Ha Abierto El Aula.',
                             'Éxito'
                             )
                 </script>
@@ -59,7 +59,7 @@
                 <script>
                     Swal.fire(
                             'Guardado!',
-                            'El documento ha sido aceptado con exito.',
+                            'El Documento Ha Sido Aceptado Con Éxito.',
                             'Éxito'
                             )
                 </script>
@@ -87,7 +87,7 @@
                 <script>
                     Swal.fire(
                             'ERROR',
-                            'Ya existe un aula abier con el proceso elejido!',
+                            'Ya Existe Un Aula Abierta Con El Proceso y Maestro Elejido!',
                             'Éxito'
                             )
                 </script>

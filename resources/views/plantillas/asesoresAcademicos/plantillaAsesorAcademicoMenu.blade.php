@@ -84,7 +84,7 @@
                                     <li class="menu-item-estancia1">
                                         <a href="{{ route('homeAcademico', 3)}}"  title="ESTADIA">
                                             <div class="icon"><img src="/icons/antProceso.png" alt=""></div>
-                                            <div class="title"><span>Estadias</span>
+                                            <div class="title"><span>Estadías</span>
                                             
                                             </div>
                                         </a>
@@ -100,7 +100,7 @@
                                     <li  class="menu-item-estancia1">
                                         <a href="{{ route('homeAcademico', 5)}}"  title="ESTADIAS NACIONALES">
                                             <div class="icon"><img src="/icons/antProceso.png" alt=""></div>
-                                            <div class="title"><span>estadias nacionales</span>
+                                            <div class="title"><span>Estadías Nacionales</span>
                                             
                                             </div>
                                         </a>
@@ -149,7 +149,7 @@
                                         <li  class="menu-item-estancia1">
                                             <a href="{{ route('cedulas',[ $identificadorProceso = 1, $identificadorDocumento = 6 ])}}"  title="Cedulas">
                                                 <div class="icon"><img src="/icons/ARCHIVO-CEDULAS.png" alt=""></div>
-                                                <div class="title"><span>Cedulas</span>
+                                                <div class="title"><span>Cédulas</span>
                                                 
                                                 </div>
                                             </a>
@@ -200,7 +200,7 @@
                                         <li  class="menu-item-estancia1">
                                             <a href="{{ route('cedulas',[ $identificadorProceso = 2, $identificadorDocumento = 6])}}"  title="Cedulas">
                                                 <div class="icon"><img src="/icons/ARCHIVO-CEDULAS.png" alt=""></div>
-                                                <div class="title"><span>Cedulas</span>
+                                                <div class="title"><span>Cédulas</span>
                                                 
                                                 </div>
                                             </a>
@@ -228,7 +228,7 @@
                                        --}}
                                     <ul class="menu-estancia1">
                                         <div class="icon"><img src="/icons/alumno-ADMINISTRATIVO.png" alt=""></div>
-                                        <div class="title"><span>Estadias</span>
+                                        <div class="title"><span>Estadías</span>
                                         
                                         </div>
                                         <li class="menu-item-estancia1">
@@ -250,7 +250,7 @@
                                         <li  class="menu-item-estancia1">
                                             <a href="{{ route('cedulas',[ $identificadorProceso = 3, $identificadorDocumento = 6])}}"  title="proceso">
                                                 <div class="icon"><img src="/icons/ARCHIVO-CEDULAS.png" alt=""></div>
-                                                <div class="title"><span>Cedulas</span>
+                                                <div class="title"><span>Cédulas</span>
                                                 
                                                 </div>
                                             </a>
@@ -292,7 +292,7 @@
                                         <li  class="menu-item-estancia1">
                                             <a href="{{ route('cedulas',[ $identificadorProceso = 4, $identificadorDocumento = 6])}}"  title="Cdeulas">
                                                 <div class="icon"><img src="/icons/ARCHIVO-CEDULAS.png" alt=""></div>
-                                                <div class="title"><span>Cedulas</span>
+                                                <div class="title"><span>Cédulas</span>
                                                 
                                                 </div>
                                             </a>
@@ -320,7 +320,7 @@
                                        --}}
                                     <ul class="menu-estancia1">
                                         <div class="icon"><img src="/icons/alumno-ADMINISTRATIVO.png" alt=""></div>
-                                        <div class="title"><span>Estadias Nacionales</span>
+                                        <div class="title"><span>Estadías Nacionales</span>
                                         
                                         </div>
                                         <li class="menu-item-estancia1">
@@ -350,7 +350,7 @@
                                         <li  class="menu-item-estancia1">
                                             <a href="{{route('cedulas', [$identificadorProceso = 5, $identificadorDocumento = 6])}}"  title="Cedulas">
                                                 <div class="icon"><img src="/icons/ARCHIVO-CEDULAS.png" alt=""></div>
-                                                <div class="title"><span>Cedulas</span>
+                                                <div class="title"><span>Cédulas</span>
                                                 
                                                 </div>
                                             </a>

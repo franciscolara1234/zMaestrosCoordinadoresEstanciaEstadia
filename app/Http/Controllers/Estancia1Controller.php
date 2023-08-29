@@ -84,11 +84,19 @@ class Estancia1Controller extends Controller
                 $AE = new Asesor_emp;
                 $AE->Nombre = $asesorEmpresarial;
                 $AE->save();
-                $idAE=$AE->IdAE;
+         
+                $nomAE = DB::table('ae')->select('IdAE')->orderBy('IdAE', 'desc')->first();
+                // ->where('Nombre', $asesorEmpresarial)->first();
+                $idAE=$nomAE->IdAE;
+        
+
+                // select('rol')->orderBy('usu_id', 'desc')->first();
+
                 $relacionAE = new ae_pp;
-                $relacionAE->IdAsesor = $idAE;
+                $relacionAE->Idae = $idAE;
                 $relacionAE->IdProceso = $idProceso;
                 $relacionAE->save();
+                
                 
                 $relacionEmp = new emp_pp;
                 $relacionEmp->IdEmp = $empresa;
@@ -142,7 +150,7 @@ class Estancia1Controller extends Controller
 
  //*funcional
         $userID = Auth::user()->id;
-        $name = ['Estancia I', 'Estancias II', 'Estadía', 'Estadías Nacionales', 'Servicio Social'];
+        $name = ['Estancia I', 'Estancias II', 'Estadía', 'Servicio Social', 'Estadías Nacionales'];
         //!cambiar este numero si se quiere agregar un nuevo proceso y tambien agregar el nombre en $name
         if ($proces > 0 && $proces <= 5) { //comprueba si el numero es de algun proceso del 1...5
             $var = [$proces, $name[$proces - 1]]; //guarda el numero y nombre del proceso
@@ -565,6 +573,12 @@ class Estancia1Controller extends Controller
 
     public function editar_documento_alumno(Request $request,  $idDoc, $idProceso)
     {
+
+        $request->validate([
+            'docs_archivo' => "required|mimetypes:application/pdf|max:30000"
+        ]);
+
+
         $documento = documentos::find($idDoc);
         $nombreDoc = $documento->ruta;
 
@@ -652,7 +666,7 @@ class Estancia1Controller extends Controller
                     }
                 }
 
-                return redirect('estancia1/' . $idProceso)->with('success', 'Documento Académico Cambiado Con Exito: ' . $nombreDoc);
+                return redirect('estancia1/' . $idProceso)->with('success', 'Documento Cambiado Con Exito: ' . $nombreDoc);
             } 
         }
         

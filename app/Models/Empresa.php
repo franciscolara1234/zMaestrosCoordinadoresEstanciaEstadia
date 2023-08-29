@@ -5,16 +5,47 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 use Exception;
 
 class Empresa extends Model
 {
     protected $table = 'empresa';
+    protected $primaryKey='IdEmp';
+    public $timestamps = false;
 
     /**
      * LLamada a la peticion para agregar un nuevo marcador
      * Tambien devuelve la llamada si Ocurrió algun error
     */
+
+    protected $fillable = [
+        // 'IdEmp',
+        'Nombre',
+        'Direccion',
+        'Correo',
+        'Telefono',
+        'RFC',
+        'Giro',
+        'URLemp',
+        'fk_TipoEmp',
+        'fk_TamañoEmp'
+    ];
+
+    public function tipoEmp()
+    {
+        return $this->belongsTo(TipoEmp::class, 'fk_TipoEmp', 'id_Tipo_Emp');
+    }
+
+    public function tipoEmpresa()
+    {
+        return $this->belongsTo(TipoEmp::class, 'fk_TipoEmp');
+    }
+
+    public function tamañoEmpresa()
+    {
+        return $this->belongsTo(TipoEmp::class, 'fk_TamañoEmp');
+    }
 
     public static function requestInsertEmpresa($data) {
 
@@ -31,7 +62,7 @@ class Empresa extends Model
                 "code" => 500,
                 "success" => false,
                 "message" => $e->getMessage()
-              );
+            );
         }
     }
 
@@ -45,7 +76,7 @@ class Empresa extends Model
 
         try{
             $empresaId = DB::table('empresa')->insertGetId($data);
-            
+
             $arrayResponse = array(
                 "code"      => 200,
                 "message"   => "Se ha agragado el registro",

@@ -617,7 +617,7 @@ class AsesorAcademicoRutasController extends Controller
                 $documentoEstado->estadoAca = $idEstado; 
                 $documentoEstado->save();
 
-                return redirect()->route('cedulas', ['identificadorProceso'=>$identificadorProceso, 'identificadorDocumento'=>$identificadorDocumento])->with('documento', 'Mensaje Guardado');
+                return redirect()->route('cedulas', ['identificadorProceso'=>$identificadorProceso, 'identificadorDocumento'=>$identificadorDocumento])->with('documento', 'Mensaje Guardado con Éxito');
 
         // return redirect()->route('cedulas', ['idDoc' => $idDoc, 'idProceso'=>$idProceso]);
 

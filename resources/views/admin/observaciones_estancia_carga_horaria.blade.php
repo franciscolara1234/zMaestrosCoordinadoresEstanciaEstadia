@@ -53,7 +53,7 @@
 
 
                     {{-- ///header --}}
-                @if($documento->IdEstado=1 && $documento->estadoAca==NULL )
+                @if($documento->IdEstado==1 && $documento->estadoAca==NULL && $documento->IdTipoDoc == 6 || $documento->IdEstado==1 && $documento->estadoAca==Null && $documento->IdTipoDoc==7)
                     <div class="page-header">
                         <h2 class="text-center" style="padding: 1%">Cambiar/Actualizar Documento{{$documento->ruta}}</h2>
                     </div>
@@ -84,7 +84,7 @@
 
                     </div>
         @endif --}}
-        @if($documento->IdEstado=1 && $documento->estadoAca==NULL || sizeof($documento->comentarios_docu)!=0 || $documento->IdEstado=3)
+        @if($documento->IdEstado==2 && $documento->estadoAca==NULL && $documento->idTipoDoc ==6 || $documento->estadoAca == 2 && $documento->IdTipoDoc == 6 || $documento->IdEstado=3 && $documento->IdTipoDoc == 6 || sizeof($documento->comentarios_docu)!=0 || $documento->IdEstado==2 && $documento->estadoAca==NULL && $documento->idTipoDoc ==7 || $documento->estadoAca == 2 && $documento->IdTipoDoc == 7 || $documento->IdEstado=3 && $documento->IdTipoDoc == 6 || sizeof($documento->comentarios_docu)!=0)
                     <div class="page-header">
                         <h4 class="text-center" style="padding: 1%">Actualizar Documento</h4>
                     </div>

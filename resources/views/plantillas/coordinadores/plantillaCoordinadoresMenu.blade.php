@@ -66,7 +66,7 @@
                                 --}}
                                 <ul class="menu-estancia1">
                                     <div class="icon"><img src="/icons/anteriorPro.png" alt=""></div>
-                                    <div class="title"><span>procesos anteriores</span>
+                                    <div class="title"><span>Procesos Anteriores</span>
                                     
                                     </div>
                                     <li class="menu-item-estancia1">
@@ -88,7 +88,7 @@
                                     <li class="menu-item-estancia1">
                                         <a href="{{ route('inicioProcesosAnteriores', 3)}}"  title="ESTADIA">
                                             <div class="icon"><img src="/icons/antProceso.png" alt=""></div>
-                                            <div class="title"><span>Estadias</span>
+                                            <div class="title"><span>Estadías</span>
                                             
                                             </div>
                                         </a>
@@ -104,7 +104,7 @@
                                     <li  class="menu-item-estancia1">
                                         <a href="{{ route('inicioProcesosAnteriores', 5)}}"  title="ESTADIAS NACIONALES">
                                             <div class="icon"><img src="/icons/antProceso.png" alt="ESTADIAS NACIONALES"></div>
-                                            <div class="title"><span>estadias nacionales</span>
+                                            <div class="title"><span>Estadías Nacionales</span>
                                             
                                             </div>
                                         </a>
@@ -137,7 +137,7 @@
                                         <li class="menu-item-estancia1">
                                             <a href="{{ route('AsignarMaestroAulaCoordinacion')}}" title="Abrir Aula">
                                                 <div class="icon"><img src="/icons/abrirAula.png" alt=""></div>
-                                                <div class="title"><span>Abrir Aulas del periodo</span>
+                                                <div class="title"><span>Abrir Aulas Del Período</span>
                                                 
                                                 </div>
                                             </a>
@@ -230,7 +230,7 @@
                                        --}}
                                     <ul class="menu-estancia1">
                                         <div class="icon"><img src="/icons/alumno-ADMINISTRATIVO.png" alt=""></div>
-                                        <div class="title"><span>Estadias</span>
+                                        <div class="title"><span>Estadías</span>
                                         
                                         </div>
                                         <li class="menu-item-estancia1">
@@ -282,7 +282,7 @@
                                        --}}
                                     <ul class="menu-estancia1">
                                         <div class="icon"><img src="/icons/alumno-ADMINISTRATIVO.png" alt=""></div>
-                                        <div class="title"><span>Estadias Nacionales</span>
+                                        <div class="title"><span>Estadías Nacionales</span>
                                         
                                         </div>
                                         <li class="menu-item-estancia1">
