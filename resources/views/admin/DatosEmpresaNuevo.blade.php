@@ -63,7 +63,7 @@
                         <th>TipoEmpresa</th>
                         <th>TamañoEmpresa</th>
                         <th>Editar</th>
-                        <th>Eliminar</th>
+                        {{-- <th>Eliminar</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -89,12 +89,12 @@
                                 </form>
 
                             </td>
-                            <td>
+                            {{-- <td>
                                 <form action="{{ route('eliminarEmpresa.index',[1], $Edatos->IdEmp) }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn btn-danger btnEliminarUser">Eliminar</button>
                                 </form>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>
