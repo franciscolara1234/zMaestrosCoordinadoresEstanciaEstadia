@@ -209,7 +209,6 @@
                                                     @endswitch
                                                 @endif
                                             </form>
-                                            si entra aqui
                                             @if ($doc->estadoAca == 2 || $doc->IdEstado==3)
                                                 <form
                                                     action="{{ route('observacion_documento_ver.index',[ $doc->IdDoc, $tipoProcesoSeleccionado]) }}"
@@ -219,7 +218,6 @@
                                                         class="btn btn-danger btnObservaciones">Observacion</button>
                                                 </form>
                                             @endif
-                                            pero no aqui
                                             {{-- @if ($doc->IdEstado == 3)
                                                 <form
                                                     action="{{ route('observacion_documento_ver.index',[ $doc->IdDoc, $tipoProcesoSeleccionado]) }}"
