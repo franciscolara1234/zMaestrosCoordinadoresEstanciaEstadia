@@ -30,7 +30,7 @@
                     <a href="{{ route('estancia1.index', [3]) }}">Estadías</a>
                 </div>
                 <div class="row">
-                    <a href="{{ route('estancia1.index', [4]) }}">Estadías Nacionales</a>
+                    <a href="{{ route('estancia1.index', [5]) }}">Estadías Nacionales</a>
                 </div>
 
             </div>
@@ -39,7 +39,7 @@
                 <img src="{{ asset('/css/documentos.png') }}">
 
                 <div class="row">
-                    <a href="{{ route('estancia1.index', [5]) }}">Servicio Social</a>
+                    <a href="{{ route('estancia1.index', [4]) }}">Servicio Social</a>
                 </div>
 
             </div>
