@@ -61,7 +61,7 @@
                         <th>Rol</th>
                         <th>Correo</th>
                         <th>Editar</th>
-                        <th>Eliminar</th>
+                        {{-- <th>Eliminar</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -79,12 +79,12 @@
                                             class="zmdi zmdi-edit"></i></button>
                                 </form>
                             </td>
-                            <td>
+                            {{-- <td>
                                 <form action="{{ route('eliminarUsuario.index', $user->id) }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn btn-danger btnEliminarUser">Eliminar</button>
                                 </form>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>
