@@ -61,7 +61,7 @@ class AsesorAcademicoRutasController extends Controller
 
         }
         //se crea las variables que se usaran para las consultas 
-        $idPeriodo = $periodoExistente->IdPeriodo;
+        // $idPeriodo = $periodoExistente->IdPeriodo;
         $idAseAcademico = Auth::user()->id;
         $tituloInicio = "Procesos Anteriores";
         //se busca el IdAsesor de la tabla aa que es el perfil del la tabla User que le pertenecen a los usarios con el tipo de usuario 4 o usuario asesorAcademico
@@ -112,7 +112,13 @@ class AsesorAcademicoRutasController extends Controller
     public function progreso($identificadorProceso){
 
         //se llama a la funcion del helpers para saber la el actual periodo 
+        // list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
+
+
         list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
+        if($periodoExistenteComprobacion==true)
+        {
+            
         $userCarrera = Auth::user()->IdCarrera;
         $tituloPagina = "";
         switch($identificadorProceso){
@@ -161,10 +167,23 @@ class AsesorAcademicoRutasController extends Controller
          return view('vistasAsesoresAcademicos.asesoresAcademicosProgreso')->with(['procesosAsignados' => $procesosAsignadosAnteriores])->with(['alumnosConEmpresa'=>$alumnosConEmpresa])->with(['alumnosSinEmpresa'=>$alumnosSinEmpresa])->with(['tituloInicio'=>$tituloInicio])->with(['tituloPagina'=>$tituloPagina]);
          
        
+        }
+        else
+        {
+            return view('vistasAsesoresAcademicos.asesorAcademicoNoExistePeriodo');
+        }
+         
+
     }
     //
     public function progresoDocumentacion($identificadorProcesoAlumno){
         list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
+
+        // list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
+        // if($periodoExistenteComprobacion==true)
+        // {
+           
+
         $userCarrera = Auth::user()->IdCarrera;
 
         //se crea las variables que se usaran para las consultas 
@@ -361,12 +380,25 @@ class AsesorAcademicoRutasController extends Controller
         }
         // dump($informacionProcesoElejido);
         return view('vistasAsesoresAcademicos.asesoresAcademicosInformacionAlumno')->with(['document1' => $document1])->with(['document2' => $document2])->with(['document3' => $document3])->with(['document4' => $document4])->with(['document5' => $document5])->with(['informacionProcesoElejido'=>$informacionProcesoElejido]);
+
+    //     }
+    //    else
+    //    {
+    //        return view('vistasAsesoresAcademicos.asesorAcademicoNoExistePeriodo');
+    //    }
+
+
     }
 
     public function cedulas($identificadorProceso, $identificadorDocumento){
         
         //se llama a la funcion del helpers para saber la el actual periodo 
+        // list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
+        
         list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
+        if($periodoExistenteComprobacion==true)
+        {
+           
         $userCarrera = Auth::user()->IdCarrera;
 
         //obetener el titulo de la pagina dependiendo la seleccion del usuario
@@ -467,10 +499,20 @@ class AsesorAcademicoRutasController extends Controller
         })->count();
 
         return view('vistasAsesoresAcademicos.asesoresAcademicosCedulasTotal')->with(['documentosProcesosAsignados' => $documentosProcesosAsignados])->with(['tituloPagina'=>$tituloPagina])->with(['totalAlumnos'=>$totalAlumnos])->with(['totalDocumentosEnLinea'=>$totalDocumentosEnLinea])->with(['totalDocumentosApro'=>$totalDocumentosApro])->with(['totalDocumentosRechazados'=>$totalDocumentosRechazados])->with(['identificadorDocumento'=>$identificadorDocumento])->with(['tituloProceso'=>$tituloProceso]);
+
+        }
+       else
+       {
+           return view('vistasAsesoresAcademicos.asesorAcademicoNoExistePeriodo');
+       }
+
+           
     }
         //ver documento
         public function ver_documentoAcademico($name, $proces)
         { //*funcion optimizada 
+
+            
             $nombre = '/documentos/' . $name;
             $nombreD = public_path($nombre);
             $resp = file_exists($nombreD);
@@ -513,6 +555,10 @@ class AsesorAcademicoRutasController extends Controller
 
     public function observaciones($idDoc, $idProceso){
 
+        list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
+        if($periodoExistenteComprobacion==true)
+        {
+          
 
         $documento = Orm_documentos::where('IdDoc', $idDoc)->first();
         $alumno = Orm_user::where('id', $documento->usuario)->select('id','name','Matricula','IdCarrera')->first();
@@ -587,6 +633,14 @@ class AsesorAcademicoRutasController extends Controller
         // dump($documento);
 
         return view('vistasAsesoresAcademicos.asesoresAcademicosIngresarMensajeCedulaDefinicionProyecto')->with(['tituloPagina'=>$tituloPagina])->with(['alumno'=>$alumno])->with(['documento'=>$documento])->with(['estatusDocumento'=>$estatusDocumento])->with(['idProceso'=>$idProceso])->with(['tituloProceso'=>$tituloProceso]);
+ 
+        }
+       else
+       {
+           return view('vistasAsesoresAcademicos.asesorAcademicoNoExistePeriodo');
+       }
+
+
     }
 
     public function guardarMensaje(Request $request, $idDoc, $idProceso){
@@ -625,7 +679,13 @@ class AsesorAcademicoRutasController extends Controller
     }
 
     public function calificaciones($identificadorProceso){
+        // list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
+
+
         list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
+        if($periodoExistenteComprobacion==true)
+        {
+           
         $userCarrera = Auth::user()->IdCarrera;
 
         //obetener el titulo de la pagina dependiendo la seleccion del usuario
@@ -689,44 +749,63 @@ class AsesorAcademicoRutasController extends Controller
         
 
         return view('vistasAsesoresAcademicos.asesoresAcademicosCalificacionesAlumnos')->with(['procesosAsignados'=>$procesosAsignados])->with(['tituloPagina'=>$tituloPagina])->with(['alumnosAprobados'=>$alumnosAprobados])->with(['alumnosReprobados'=>$alumnosReprobados])->with(['alumnosSinCalificacion'=>$alumnosSinCalificacion])->with(['alumnosEntotal'=>$alumnosEntotal]);
+        }
+       else
+       {
+           return view('vistasAsesoresAcademicos.asesorAcademicoNoExistePeriodo');
+       }
+
+
 
     }
 
     public function ingresarCalificacion($idProcesoAlumno, $identificadorProceso){
 
         list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
-        $userCarrera = Auth::user()->IdCarrera;
+        if($periodoExistenteComprobacion==true)
+        {
+            $userCarrera = Auth::user()->IdCarrera;
 
-        //obetener el titulo de la pagina dependiendo la seleccion del usuario
-        $tituloPagina = "";
+            //obetener el titulo de la pagina dependiendo la seleccion del usuario
+            $tituloPagina = "";
+        
+                switch ($identificadorProceso) {
+                    case 1:
+                        $tituloPagina = "ESTANCIA 1";
+                        break;
+                    case 2:
+                        $tituloPagina = "ESTANCIA 2";
+                        break;
+                    case 3:
+                        $tituloPagina = "ESTADÍAS";
+                        break;
+                    case 4:
+                        $tituloPagina = "SERVICIO SOCIAL";
+                        break;
+                    case 5:
+                        $tituloPagina = "ESTADÍAS NACIONALES";
+                        break;
+                }
     
-            switch ($identificadorProceso) {
-                case 1:
-                    $tituloPagina = "ESTANCIA 1";
-                    break;
-                case 2:
-                    $tituloPagina = "ESTANCIA 2";
-                    break;
-                case 3:
-                    $tituloPagina = "ESTADÍAS";
-                    break;
-                case 4:
-                    $tituloPagina = "SERVICIO SOCIAL";
-                    break;
-                case 5:
-                    $tituloPagina = "ESTADÍAS NACIONALES";
-                    break;
-            }
+                //se crea las variables que se usaran para las consultas 
+                $idPeriodo = $periodoExistente->IdPeriodo;
+                $idAseAcademico = Auth::user()->id;
+                // $tituloInicio = "Procesos Anteriores";
+                //se busca el IdAsesor de la tabla aa que es el perfil del la tabla User que le pertenecen a los usarios con el tipo de usuario 4 o usuario asesorAcademico
+                $procesoSeleccionado = Orm_proceso::where('IdProceso', $idProcesoAlumno)->first();
+                // dump($procesoSeleccionado);
+    
+            return view('vistasAsesoresAcademicos.asesoresAcademicosIngresarCalificacionAlumno')->with(['procesoSeleccionado'=>$procesoSeleccionado])->with('calificacion', 'la calificacion se guardo');
+    
+        }
+       else
+       {
+           return view('vistasAsesoresAcademicos.asesorAcademicoNoExistePeriodo');
+       }
+ 
 
-            //se crea las variables que se usaran para las consultas 
-            $idPeriodo = $periodoExistente->IdPeriodo;
-            $idAseAcademico = Auth::user()->id;
-            // $tituloInicio = "Procesos Anteriores";
-            //se busca el IdAsesor de la tabla aa que es el perfil del la tabla User que le pertenecen a los usarios con el tipo de usuario 4 o usuario asesorAcademico
-            $procesoSeleccionado = Orm_proceso::where('IdProceso', $idProcesoAlumno)->first();
-            // dump($procesoSeleccionado);
 
-        return view('vistasAsesoresAcademicos.asesoresAcademicosIngresarCalificacionAlumno')->with(['procesoSeleccionado'=>$procesoSeleccionado])->with('calificacion', 'la calificacion se guardo');
+        // list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
 
     }
 
@@ -771,6 +850,9 @@ class AsesorAcademicoRutasController extends Controller
     public function actualizarCalificacion($idProcesoAlumno, $identificadorProceso){
 
         list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
+        if($periodoExistenteComprobacion==true)
+        {
+        // list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
         $userCarrera = Auth::user()->IdCarrera;
         //obetener el titulo de la pagina dependiendo la seleccion del usuario
         $tituloPagina = "";
@@ -801,57 +883,77 @@ class AsesorAcademicoRutasController extends Controller
             $procesoSeleccionado = Orm_proceso::where('IdProceso', $idProcesoAlumno)->first();
 
             return view('vistasAsesoresAcademicos.asesoresAcademicosActualizarCalificacion')->with(['procesoSeleccionado'=>$procesoSeleccionado]);
+        }
+       else
+       {
+           return view('vistasAsesoresAcademicos.asesorAcademicoNoExistePeriodo');
+       }
+ 
     }
 
 
     public function guardarCalificacion(Request $request, $procesoAlumno){
-        $this->validate(request(), [
-            'cal1' => 'required|integer|min:50|max:100',
-            'cal2' => 'required|integer|min:50|max:100',
-            'cal3' => 'required|integer|min:50|max:100',
-            'cal4' => 'required|integer|min:50|max:100',
-            'cal5' => 'required|integer|min:50|max:100',
-            'cal6' => 'required|integer|min:50|max:100',
-            'cal7' => 'required|integer|min:50|max:100',
-            'cal8' => 'required|integer|min:50|max:100',
-            'cal9' => 'required|integer|min:50|max:100',
-            'cal10' => 'required|integer|min:50|max:100',
-            'cal11' => 'required|integer|min:50|max:100',
-            'cal12' => 'required|integer|min:50|max:100',
-        ]);
 
-  //tipo de comentario, 1 MaestrosAcademicos, 2 Vinculacion
-        $procesoRedirect = Orm_Proceso::where('IdProceso', $procesoAlumno)->select('IdTipoProceso')->first();
-        $identificadorProceso = $procesoRedirect->IdTipoProceso;
-        $idUserAcademico = Auth::user()->id;
+        list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
+        if($periodoExistenteComprobacion==true)
+        {
+            $this->validate(request(), [
+                'cal1' => 'required|integer|min:50|max:100',
+                'cal2' => 'required|integer|min:50|max:100',
+                'cal3' => 'required|integer|min:50|max:100',
+                'cal4' => 'required|integer|min:50|max:100',
+                'cal5' => 'required|integer|min:50|max:100',
+                'cal6' => 'required|integer|min:50|max:100',
+                'cal7' => 'required|integer|min:50|max:100',
+                'cal8' => 'required|integer|min:50|max:100',
+                'cal9' => 'required|integer|min:50|max:100',
+                'cal10' => 'required|integer|min:50|max:100',
+                'cal11' => 'required|integer|min:50|max:100',
+                'cal12' => 'required|integer|min:50|max:100',
+            ]);
+    
+      //tipo de comentario, 1 MaestrosAcademicos, 2 Vinculacion
+            $procesoRedirect = Orm_Proceso::where('IdProceso', $procesoAlumno)->select('IdTipoProceso')->first();
+            $identificadorProceso = $procesoRedirect->IdTipoProceso;
+            $idUserAcademico = Auth::user()->id;
+            
+            $cal_final =( ($request->input('cal1')+$request->input('cal2')+$request->input('cal3')+$request->input('cal4')+$request->input('cal5')+$request->input('cal6')+$request->input('cal7')+$request->input('cal8')+$request->input('cal9')+$request->input('cal10')+$request->input('cal11')+$request->input('cal12')) /12 );
+    
+    
+            $calificacion = Orm_calificaciones::updateOrCreate([
+                'IdUser'=>$idUserAcademico,
+                'IdProceso'=>$procesoAlumno,
+                'TipoCalificaciones'=>1
+            ],[
+                'cal1'=>$request->input('cal1'),
+                'cal2'=>$request->input('cal12'),
+                'cal3'=>$request->input('cal3'),
+                'cal4'=>$request->input('cal4'),
+                'cal5'=>$request->input('cal5'),
+                'cal6'=>$request->input('cal6'),
+                'cal7'=>$request->input('cal7'),
+                'cal8'=>$request->input('cal8'),
+                'cal9'=>$request->input('cal9'),
+                'cal10'=>$request->input('cal10'),
+                'cal11'=>$request->input('cal11'),
+                'cal12'=>$request->input('cal12'),
+                'cal_final'=>$cal_final
+    
+            ]);
+    
+                    return redirect()->route('calificaciones', ['identificadorProceso'=>$identificadorProceso])->with('calificacion', 'Calificacion se guardo');
+    
+                    // return redirect()->route('cedulas', ['identificadorProceso'=>$identificadorProceso, 'identificadorDocumento'=>$identificadorDocumento]);
         
-        $cal_final =( ($request->input('cal1')+$request->input('cal2')+$request->input('cal3')+$request->input('cal4')+$request->input('cal5')+$request->input('cal6')+$request->input('cal7')+$request->input('cal8')+$request->input('cal9')+$request->input('cal10')+$request->input('cal11')+$request->input('cal12')) /12 );
+        
+        }
+       else
+       {
+           return view('vistasAsesoresAcademicos.asesorAcademicoNoExistePeriodo');
+       }
 
 
-        $calificacion = Orm_calificaciones::updateOrCreate([
-            'IdUser'=>$idUserAcademico,
-            'IdProceso'=>$procesoAlumno,
-            'TipoCalificaciones'=>1
-        ],[
-            'cal1'=>$request->input('cal1'),
-            'cal2'=>$request->input('cal12'),
-            'cal3'=>$request->input('cal3'),
-            'cal4'=>$request->input('cal4'),
-            'cal5'=>$request->input('cal5'),
-            'cal6'=>$request->input('cal6'),
-            'cal7'=>$request->input('cal7'),
-            'cal8'=>$request->input('cal8'),
-            'cal9'=>$request->input('cal9'),
-            'cal10'=>$request->input('cal10'),
-            'cal11'=>$request->input('cal11'),
-            'cal12'=>$request->input('cal12'),
-            'cal_final'=>$cal_final
-
-        ]);
-
-                return redirect()->route('calificaciones', ['identificadorProceso'=>$identificadorProceso])->with('calificacion', 'Calificacion se guardo');
-
-                // return redirect()->route('cedulas', ['identificadorProceso'=>$identificadorProceso, 'identificadorDocumento'=>$identificadorDocumento]);
+            
     }
 
 

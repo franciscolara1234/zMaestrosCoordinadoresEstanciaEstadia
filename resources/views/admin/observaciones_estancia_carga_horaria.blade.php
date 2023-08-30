@@ -88,8 +88,8 @@
                             </form>
                         </div>
                         @endif
-
-        <form action="{{ route('observacion_documento',[$documento->IdDoc, $procesoTipoSeleccionado]) }}" method="post"
+{{-- @dump($documento->) --}}
+        <form action="{{ route('observacion_documento',[$documento->IdDoc, $idProcesoSeleccionado = $procesoTipoSeleccionado]) }}" method="post"
             enctype="multipart/form-data">
             @csrf
 
@@ -108,12 +108,15 @@
             @else
             
                     @if (empty($documento->comentario))
-                        <div class="text-center" style="padding: 2%">
-                            <textarea class="form-control" id="observaciones" rows="5" name="observaciones">vinculacion </textarea>
-                        </div>         
+                        @if (auth()->user()->IdTipoUsu == 1)
+                            <div class="text-center" style="padding: 2%">
+                                <textarea class="form-control" id="observaciones" rows="5" name="observaciones">vinculacion </textarea>
+                            </div>         
+                        @endif
                     @else
+
                         <div class="text-center" style="padding: 2%">
-                            <textarea class="form-control" id="observaciones" rows="5" name="observaciones">{{$documento->comentario}} </textarea>
+                            <textarea class="form-control" id="observaciones" rows="5" name="observaciones" readonly>{{$documento->comentario}} </textarea>
                         </div>         
 
                     @endif
@@ -125,14 +128,14 @@
                 
             @else
 
-            @if (auth()->user()->IdTipoUsu == 1)
-                @if ( (empty($documento->comentario )) || $documento->Idestado == 1 || $documento->Idestado==3)
-                <div class="text-center">
-                    <button class="btn btn-dark btn-lg btn-block g" type="submit">Guardar</button>
-                </div>
+                @if (auth()->user()->IdTipoUsu == 1)
+                    
+                    <div class="text-center">
+                        <button class="btn btn-dark btn-lg btn-block g" type="submit">Guardar</button>
+                    </div>
 
-                @endif   
-            @endif
+                    
+                @endif
 
 
 

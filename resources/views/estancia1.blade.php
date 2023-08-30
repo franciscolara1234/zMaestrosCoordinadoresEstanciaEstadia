@@ -170,7 +170,7 @@
                                                     @switch($doc->IdTipoDoc)
                                                         @case(6)
                                                         
-                                                        @if($doc->IdEstado=1 && $doc->estadoAca==NULL )
+                                                        @if($doc->IdEstado==2 && $doc->estadoAca==NULL || $doc->IdEstado==2 && $doc->estadoAca==1  )
                                                         
                                                         <a href="{{ route('observacion_documento_ver.index',[ $doc->IdDoc, $tipoProcesoSeleccionado]) }}">cambiar documentacion</a>    
                                                         @endif
@@ -187,7 +187,7 @@
 
 
                                                                          
-                                                        @if($doc->IdEstado=1 && $doc->estadoAca==NULL )
+                                                        @if($doc->IdEstado==2 && $doc->estadoAca==NULL || $doc->IdEstado==2 && $doc->estadoAca==1  )
                                                         
                                                         <a href="{{ route('observacion_documento_ver.index',[ $doc->IdDoc, $tipoProcesoSeleccionado]) }}">cambiar documentacion</a>    
                                                         @endif
@@ -209,7 +209,8 @@
                                                     @endswitch
                                                 @endif
                                             </form>
-                                            @if ($doc->estadoAca == 2)
+                                            si entra aqui
+                                            @if ($doc->estadoAca == 2 || $doc->IdEstado==3)
                                                 <form
                                                     action="{{ route('observacion_documento_ver.index',[ $doc->IdDoc, $tipoProcesoSeleccionado]) }}"
                                                     class="d-flex"
@@ -218,7 +219,8 @@
                                                         class="btn btn-danger btnObservaciones">Observacion</button>
                                                 </form>
                                             @endif
-                                            @if ($doc->IdEstado === 3)
+                                            pero no aqui
+                                            {{-- @if ($doc->IdEstado == 3)
                                                 <form
                                                     action="{{ route('observacion_documento_ver.index',[ $doc->IdDoc, $tipoProcesoSeleccionado]) }}"
                                                     class="d-flex"
@@ -226,7 +228,7 @@
                                                     <button type="submit"
                                                         class="btn btn-danger btnObservaciones">Observacion</button>
                                                 </form>
-                                            @endif
+                                            @endif --}}
                                         @endif
                                     @endif
                                 @endforeach

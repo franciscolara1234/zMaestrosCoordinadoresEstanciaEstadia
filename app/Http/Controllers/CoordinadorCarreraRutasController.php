@@ -55,8 +55,12 @@ class CoordinadorCarreraRutasController extends Controller
 
         }
 
+        
         //se crea las variables que se usaran para las consultas 
-        $idPeriodo = $periodoExistente->IdPeriodo;
+
+
+
+        // $idPeriodo = $periodoExistente->IdPeriodo;
         $idCoordinador = Auth::user()->id;
         $tituloInicio = "Procesos Anteriores";
         //se busca el IdAsesor de la tabla aa que es el perfil del la tabla User que le pertenecen a los usarios con el tipo de usuario 4 o usuario asesorAcademico
@@ -113,7 +117,15 @@ class CoordinadorCarreraRutasController extends Controller
         //             $query->where('IdAsesor', $idPerfilCoordinador->IdAsesor);
         //     }])->exists();
                 
-         return view('vistasCoordinadoresCarrera.coordinadoresInicioProcesosAnteriores')->with(['procesosAsignados' => $procesosAsignadosAnteriores])->with(['alumnosConEmpresa'=>$alumnosConEmpresa])->with(['alumnosSinEmpresa'=>$alumnosSinEmpresa])->with(['tituloInicio'=>$tituloInicio])->with(['alumnosAprobados'=>$alumnosAprobados])->with(['alumnosReprobados'=>$alumnosReprobados])->with(['tituloPagina'=>$tituloPagina]);   
+
+
+         if($periodoExistenteComprobacion==true){
+            return view('vistasCoordinadoresCarrera.coordinadoresInicioProcesosAnteriores')->with(['procesosAsignados' => $procesosAsignadosAnteriores])->with(['alumnosConEmpresa'=>$alumnosConEmpresa])->with(['alumnosSinEmpresa'=>$alumnosSinEmpresa])->with(['tituloInicio'=>$tituloInicio])->with(['alumnosAprobados'=>$alumnosAprobados])->with(['alumnosReprobados'=>$alumnosReprobados])->with(['tituloPagina'=>$tituloPagina]);   
+         }
+         else{
+            return view('vistasCoordinadoresCarrera.coordinadoresInicioProcesosAnteriores')->with(['procesosAsignados' => $procesosAsignadosAnteriores])->with(['alumnosConEmpresa'=>$alumnosConEmpresa])->with(['alumnosSinEmpresa'=>$alumnosSinEmpresa])->with(['tituloInicio'=>$tituloInicio])->with(['alumnosAprobados'=>$alumnosAprobados])->with(['alumnosReprobados'=>$alumnosReprobados])->with(['tituloPagina'=>$tituloPagina]);   
+         }
+
     }
     //
 
@@ -122,54 +134,60 @@ class CoordinadorCarreraRutasController extends Controller
 
         //se llama a la funcion del helpers para saber la el actual periodo 
         list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
-        $userCarrera = Auth::user()->IdCarrera;
-        $tituloPagina = "";
-        switch($identificadorProceso){
-            case 1;
-                $tituloPagina = "ESTANCIA 1";
-                break;
-            case 2;
-                $tituloPagina = "ESTANCIA 2";
-                break;
-            case 3;
-                $tituloPagina = "ESTADIAS";
-                break;
-            case 4;
-                $tituloPagina = "SERVICIO SOCIAL";
-                break;
-            case 5;
-                $tituloPagina = "ESTADIAS NACIONALES";
-                break;
-
+        if($periodoExistenteComprobacion==true){
+            $userCarrera = Auth::user()->IdCarrera;
+            $tituloPagina = "";
+            switch($identificadorProceso){
+                case 1;
+                    $tituloPagina = "ESTANCIA 1";
+                    break;
+                case 2;
+                    $tituloPagina = "ESTANCIA 2";
+                    break;
+                case 3;
+                    $tituloPagina = "ESTADIAS";
+                    break;
+                case 4;
+                    $tituloPagina = "SERVICIO SOCIAL";
+                    break;
+                case 5;
+                    $tituloPagina = "ESTADIAS NACIONALES";
+                    break;
+    
+            }
+    
+            //se crea las variables que se usaran para las consultas 
+            $idPeriodo = $periodoExistente->IdPeriodo;
+            $idAseAcademico = Auth::user()->id;
+            $tituloInicio = "Procesos Anteriores";
+            //se busca el IdAsesor de la tabla aa que es el perfil del la tabla User que le pertenecen a los usarios con el tipo de usuario 4 o usuario asesorAcademico
+            // $idPerfilCoordinacion = Orm_coordinador::where('IdUser', $idAseAcademico)->select('IdCordinador')->first();
+            
+            //se busca los procesos donde el usuario Asesor academico esta registrado.
+            $procesosAsignadosAnteriores = Orm_proceso::where('IdCarrera', $userCarrera)->where('IdPeriodo', $idPeriodo)->where('IdTipoProceso', $identificadorProceso)->get();
+    
+    
+    
+            // $idAsesorConteo = $idPerfilCoordinacion->IdAsesor;
+    
+    
+            //se crea la consulta para saber cuantos registros de la tabla Ae_pp (AsesorEmpresarialProceso) existen con el que esten relacionadas conla tabla periodo que contenga la tabla periodo una relacion con la tabla aa_pp(AsesorAcademicoProceso) donde la tabla aa_pp tenga el identificadopr del Asesor empresarial que este logueado
+            $alumnosConEmpresa = Orm_aempresarial_proceso::whereHas('proceso_aempresarial.aa_academico_procesos', function ($query)use($userCarrera){
+                    $query->where('IdCarrera',  $userCarrera);
+                })->whereHas('proceso_aempresarial', function ($query)use($idPeriodo, $identificadorProceso){
+                    $query->where('IdPeriodo',  $idPeriodo)->where('IdTipoProceso', $identificadorProceso);
+                })->count();
+    
+            $alumnosSinEmpresa = ($procesosAsignadosAnteriores->count())-$alumnosConEmpresa;
+                // dump($alumnosConEmpresa);
+    
+                // dump($procesosAsignadosAnteriores);
+             return view('vistasCoordinadoresCarrera.coordinadoresProgreso')->with(['procesosAsignados' => $procesosAsignadosAnteriores])->with(['alumnosConEmpresa'=>$alumnosConEmpresa])->with(['alumnosSinEmpresa'=>$alumnosSinEmpresa])->with(['tituloInicio'=>$tituloInicio])->with(['tituloPagina'=>$tituloPagina]);
         }
-
-        //se crea las variables que se usaran para las consultas 
-        $idPeriodo = $periodoExistente->IdPeriodo;
-        $idAseAcademico = Auth::user()->id;
-        $tituloInicio = "Procesos Anteriores";
-        //se busca el IdAsesor de la tabla aa que es el perfil del la tabla User que le pertenecen a los usarios con el tipo de usuario 4 o usuario asesorAcademico
-        // $idPerfilCoordinacion = Orm_coordinador::where('IdUser', $idAseAcademico)->select('IdCordinador')->first();
-        
-        //se busca los procesos donde el usuario Asesor academico esta registrado.
-        $procesosAsignadosAnteriores = Orm_proceso::where('IdCarrera', $userCarrera)->where('IdPeriodo', $idPeriodo)->where('IdTipoProceso', $identificadorProceso)->get();
-
-
-
-        // $idAsesorConteo = $idPerfilCoordinacion->IdAsesor;
-
-
-        //se crea la consulta para saber cuantos registros de la tabla Ae_pp (AsesorEmpresarialProceso) existen con el que esten relacionadas conla tabla periodo que contenga la tabla periodo una relacion con la tabla aa_pp(AsesorAcademicoProceso) donde la tabla aa_pp tenga el identificadopr del Asesor empresarial que este logueado
-        $alumnosConEmpresa = Orm_aempresarial_proceso::whereHas('proceso_aempresarial.aa_academico_procesos', function ($query)use($userCarrera){
-                $query->where('IdCarrera',  $userCarrera);
-            })->whereHas('proceso_aempresarial', function ($query)use($idPeriodo, $identificadorProceso){
-                $query->where('IdPeriodo',  $idPeriodo)->where('IdTipoProceso', $identificadorProceso);
-            })->count();
-
-        $alumnosSinEmpresa = ($procesosAsignadosAnteriores->count())-$alumnosConEmpresa;
-            // dump($alumnosConEmpresa);
-
-            // dump($procesosAsignadosAnteriores);
-         return view('vistasCoordinadoresCarrera.coordinadoresProgreso')->with(['procesosAsignados' => $procesosAsignadosAnteriores])->with(['alumnosConEmpresa'=>$alumnosConEmpresa])->with(['alumnosSinEmpresa'=>$alumnosSinEmpresa])->with(['tituloInicio'=>$tituloInicio])->with(['tituloPagina'=>$tituloPagina]);
+        else
+        {
+            return view('vistasCoordinadoresCarrera.coordinadoresNOexistePeriodo');
+        }
          
        
     }
@@ -180,7 +198,7 @@ class CoordinadorCarreraRutasController extends Controller
         $userCarrera = Auth::user()->IdCarrera;
 
         //se crea las variables que se usaran para las consultas 
-        $idPeriodo = $periodoExistente->IdPeriodo;
+        // $idPeriodo = $periodoExistente->IdPeriodo;
 
         $informacionProcesoElejido = Orm_proceso::where('IdProceso', $identificadorProcesoAlumno)->get();
         // dump($informacionProcesoElejido[0]);
@@ -371,7 +389,7 @@ class CoordinadorCarreraRutasController extends Controller
                         break;
             }
         }
-        dump($informacionProcesoElejido);
+        // dump($informacionProcesoElejido);
         
         return view('vistasCoordinadoresCarrera.coordinadoresInformacionAlumno')->with(['document1' => $document1])->with(['document2' => $document2])->with(['document3' => $document3])->with(['document4' => $document4])->with(['document5' => $document5])->with(['informacionProcesoElejido'=>$informacionProcesoElejido]);
     }
@@ -403,11 +421,11 @@ class CoordinadorCarreraRutasController extends Controller
             }
 
             //se crea las variables que se usaran para las consultas 
-            $idPeriodo = $periodoExistente->IdPeriodo;
+            // $idPeriodo = $periodoExistente->IdPeriodo;
             $idAseAcademico = Auth::user()->id;
             // $tituloInicio = "Procesos Anteriores";
             $procesoSeleccionado = Orm_proceso::where('IdProceso', $idProcesoAlumno)->first();
-            dump($procesoSeleccionado);
+            // dump($procesoSeleccionado);
         return view('vistasCoordinadoresCarrera.coordinadoresCalificacion')->with(['procesoSeleccionado'=>$procesoSeleccionado]);
 
     }

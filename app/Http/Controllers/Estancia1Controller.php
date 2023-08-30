@@ -124,8 +124,8 @@ class Estancia1Controller extends Controller
         //Se creea consulta para saber si existe un aula del proceso seleccionado con el profesor.
         $existeAulaCarrera = Orm_aula_academico::where('IdCarrera', $userCarrera)->where('IdPeriodo', $periodoExistente->IdPeriodo)->where('IdTipoProceso', $proces)->exists();
 
-        $idPeriodo = $periodoExistente->IdPeriodo;
-        $idAseAcademico = 9;
+        // $idPeriodo = $periodoExistente->IdPeriodo;
+        // $idAseAcademico = 9;
 
         // $procesosAlumno = Orm_aacademico_proceso::with(['proceso' => function ($query) use($idPeriodo){
         //     $query->where('IdPeriodo', $idPeriodo);
@@ -163,7 +163,7 @@ class Estancia1Controller extends Controller
 
         $documentos = DB::table('documentos')
             ->join('detalledoc', 'documentos.IdDoc', "=", 'detalledoc.IdDoc')
-            ->join('proceso', 'proceso.IdProceso', "=", "detalledoc.IdProceso")
+            ->join('proceso', 'proceso.IdProceso', "=", "detalledoc.IdProceso")->where('IdPeriodo', $periodoExistente->IdPeriodo)
             ->where('IdTipoProceso', $proces)
             ->where('IdUsuario', $userID)
             ->get();
@@ -202,7 +202,9 @@ class Estancia1Controller extends Controller
 
         return view('estancia1', ['proceso' => $var, 'documentos' => $tiposdocumentos, 'documentacion' => $documentos, 'ae' => $asesoresEmpresariales, 'aa' => $asesoresAcademicos, 'periodoActual' =>null,'empresas'=>$empresas, 'AulaDisponibleCarera' =>$AulaDisponibleCarera]);
 
-        }else{
+        }
+        else
+        {
             // return view('/inicio');
             return redirect('inicio/')->with('error', 'No hay periodo o aula abiertas.');
         }
@@ -622,6 +624,7 @@ class Estancia1Controller extends Controller
             if (File::exists($path))//existe el archivo en la carpeta public/documentos dentro del path 
             {  
                 $documento->IdEstado = 2; //se cambia el estado de de vinculacion
+                $documento->comentario = '';
                 $documento->save(); //se guarda el cambio 
                 File::delete($path); //se elimina el archivo 
                 if ($request->hasFile('docs_archivo')) //existe archivo en el formulario enviado 
@@ -642,7 +645,7 @@ class Estancia1Controller extends Controller
                 return redirect('estancia1/' . $idProceso)->with('success', 'Documento Académico Cambiado Con Exito: ' . $nombreDoc);
             }   
         }
-        elseif($documento->IdEstado == 2 && $documento->estadoAca == NULL)
+        elseif($documento->IdEstado == 2 && $documento->estadoAca == NULL || $documento->IdEstado == 2 && $documento->estadoAca == 1)
         {  
             $path = public_path() . '/documentos/' . $nombreDoc; //ruta donde se encuentra el archivo actual a eliminar
             if (File::exists($path))//existe el archivo en la carpeta public/documentos dentro del path 
@@ -665,7 +668,6 @@ class Estancia1Controller extends Controller
                         return redirect('estancia1/' . $idProceso)->with('error', 'segundo error NO existe el archivo: ' . $nombreDoc . ' Favor de intentarlo mas tarde');
                     }
                 }
-
                 return redirect('estancia1/' . $idProceso)->with('success', 'Documento Cambiado Con Exito: ' . $nombreDoc);
             } 
         }

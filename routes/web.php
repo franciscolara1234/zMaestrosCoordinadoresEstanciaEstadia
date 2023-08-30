@@ -213,7 +213,7 @@ Route::get('/logout', [LoginController::class, 'destroy'])
          ->name('observacion_documento_ver.index');
          //*observacion guardar
          
-         Route::match(['get','post','put'],'/guardar_observaciones_documento_admin/{idDoc}', [documentosEstancia1AdminController::class, 'observacion_documento'])   ->name('observacion_documento');
+         Route::match(['get','post','put'],'/guardar_observaciones_documento_admin/{idDoc}/{idProcesoSeleccionado}', [documentosEstancia1AdminController::class, 'observacion_documento'])   ->name('observacion_documento');
          
          Route::match(['get','post','put'],'/editar_documento_alumno/{idDoc}/{idProceso}', [Estancia1Controller::class, 'editar_documento_alumno'])
          ->name('editar_documento_alumno');
@@ -498,6 +498,8 @@ Route::controller(CoordinadorCarreraRutasController::class)->group(function (){
     Route::get('progresoDocumentacionCoordinacion/{identificadorProceso}', 'progresoDocumentacionCoordinacion' )->name('progresoDocumentacionCoordinacion')->middleware('auth.coordinador');
 
     Route::get('calificacionCoordinacion/{idProcesoAlumno}/{identificadorProceso}', 'calificacionCoordinacion' )->name('calificacionCoordinacion')->middleware('auth.coordinador');
+
+    // Route::get('calificacionCoordinacion', 'calificacionCoordinacion' )->name('calificacionCoordinacion')->middleware('auth.coordinador');
 
 });
 

@@ -350,14 +350,14 @@ class documentosEstancia1AdminController extends Controller
         return back()->withInput()->with('success', 'se ha cambiado el estado del documento a:' . $estado);
     }
 
-    public function observacion_documento(Request $request, $idDoc)
+    public function observacion_documento(Request $request, $idDoc, $idProcesoSeleccionado)
     {
         $observacion = $request->get('observaciones');
         $documento = documentos::find($idDoc);
         $documento->comentario = $observacion;
         $documento->IdEstado = 3;
         $documento->save();
-        return redirect()->route('observacion_documento_ver.index', ['idDoc' => $idDoc])->with('success', 'comentario guardado correctamente');
+        return redirect()->route('observacion_documento_ver.index', ['idDoc' => $idDoc, 'idProcesoSeleccionado'=>$idProcesoSeleccionado])->with('success', 'comentario guardado correctamente');
     }
 
     public function observacion_documento_Ver($idDoc, $idProceso)

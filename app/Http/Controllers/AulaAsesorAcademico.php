@@ -161,7 +161,10 @@ class AulaAsesorAcademico extends Controller
         // ]);
 
         
-        //se procesan los campos enviados y se manda todos los usuarios que estan dados de alta con el tipo de usuario 4 que es el usuario de maestros o asesores academicos es con la funcion dentro del modelo Orm_ser de la tabla users que apunta al modelo Orm_aa-academico que hace referancia a la tabla relacionada aa (asesor academico) que esta relacionada con la tabla users
+        list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
+        if($periodoExistenteComprobacion==true)
+        {
+                    //se procesan los campos enviados y se manda todos los usuarios que estan dados de alta con el tipo de usuario 4 que es el usuario de maestros o asesores academicos es con la funcion dentro del modelo Orm_ser de la tabla users que apunta al modelo Orm_aa-academico que hace referancia a la tabla relacionada aa (asesor academico) que esta relacionada con la tabla users
         $coordinadorCarrera = Auth::user()->IdCarrera;
         $procesosNombres = Orm_tipo_proceso::select('IdTipoProceso', 'nombreProceso')->get();
         $carreraSeleccionada =  Orm_carrera::where('IdCarrera', $coordinadorCarrera)->get();
@@ -172,7 +175,12 @@ class AulaAsesorAcademico extends Controller
         ///retorna la vista con los datos necesarios del formulario
         return view('vistasCoordinadoresCarrera.coordinadoresAbrirAulasPeriodo')->with(['carreraSeleccionada'=>$carreraSeleccionada])->with(['maestros'=>$maestros])->with(['procesosNombres'=>$procesosNombres]);
 
-        
+        }
+        else
+        {
+            return view('vistasCoordinadoresCarrera.coordinadoresNOexistePeriodo');
+        }
+ 
     }
 
     /**
@@ -185,6 +193,10 @@ class AulaAsesorAcademico extends Controller
     {
 
 
+        list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
+        if($periodoExistenteComprobacion==true)
+        {
+            
         //
         //inicializacion para verificar que un periodo este abierto que esta en este momento
         $date = Carbon::now();
@@ -229,6 +241,14 @@ class AulaAsesorAcademico extends Controller
             return redirect()->to('AsignarMaestroAulaCoordinacion')->with('error','Aula Ya Existente');
         }
 
+        }
+        else
+        {
+            return view('vistasCoordinadoresCarrera.coordinadoresNOexistePeriodo');
+        }
+
+
+
 
     }
 
@@ -236,6 +256,11 @@ class AulaAsesorAcademico extends Controller
 
     public function aulasDisponibles(){
 
+
+        list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
+        if($periodoExistenteComprobacion==true)
+        {
+           
         //se llama a la funcion del helpers para saber la el actual periodo 
         list($periodoExistente, $periodoExistenteComprobacion) = verificarPeriodoEscolar();
         //se crea las variables que se usaran para las consultas 
@@ -263,11 +288,15 @@ class AulaAsesorAcademico extends Controller
 
 
         return view('vistasCoordinadoresCarrera.coordinadoresAulasDisponible')->with(['aulasDisponibles'=>$aulasDisponibles])->with(['maestrosMismaCarrera'=>$maestrosMismaCarrera])->with(['maestroDiferenteCarrera'=>$maestroDiferenteCarrera])->with(['conteoAulas'=>$conteoAulas]);
+ 
+        }
+        else
+        {
+            return view('vistasCoordinadoresCarrera.coordinadoresNOexistePeriodo');
+        }
+
          
     }
-
-
-
 
 
 }
